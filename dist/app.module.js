@@ -8,10 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const pingpong_module_1 = require("./pingpong/pingpong.module");
 const config_1 = require("@nestjs/config");
 const labcode_module_1 = require("./labcode/labcode.module");
-const Joi = require("joi");
 const cache_manager_1 = require("@nestjs/cache-manager");
 let AppModule = class AppModule {
 };
@@ -21,16 +19,11 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
-                validationSchema: Joi.object({
-                    PONG: Joi.string().required(),
-                    PORT: Joi.number().required(),
-                }),
             }),
             cache_manager_1.CacheModule.register({
                 isGlobal: true,
                 ttl: 86400,
             }),
-            pingpong_module_1.PingpongModule,
             labcode_module_1.LabcodeModule,
         ],
     })
